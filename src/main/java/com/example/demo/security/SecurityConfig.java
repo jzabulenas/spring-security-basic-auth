@@ -20,6 +20,7 @@ public class SecurityConfig {
 						.anyRequest().authenticated())
 				.headers(headers -> headers.frameOptions(f -> f.disable()))
 				.csrf(csrf -> csrf.disable())
+				.httpBasic(Customizer.withDefaults())
 				.formLogin(Customizer.withDefaults());
 
 		return http.build();
