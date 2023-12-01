@@ -16,11 +16,10 @@ public class SecurityConfig {
 			throws Exception {
 		http
 				.authorizeHttpRequests(authorize -> authorize
-						.requestMatchers("/h2-console/**").permitAll()
+						.requestMatchers("/signup").permitAll()
 						.anyRequest().authenticated())
 				.headers(headers -> headers.frameOptions(f -> f.disable()))
-				.csrf(csrf -> csrf
-						.ignoringRequestMatchers("/h2-console/**"))
+				.csrf(csrf -> csrf.disable())
 				.formLogin(Customizer.withDefaults());
 
 		return http.build();
