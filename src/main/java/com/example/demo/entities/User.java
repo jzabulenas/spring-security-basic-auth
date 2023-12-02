@@ -1,7 +1,6 @@
 package com.example.demo.entities;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -52,7 +51,7 @@ public class User implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return List.of(() -> "read");
+		return authorities;
 	}
 
 	@Override
