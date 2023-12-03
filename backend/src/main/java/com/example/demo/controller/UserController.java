@@ -20,4 +20,11 @@ public class UserController {
 	public void signup(@RequestBody User user) {
 		userRepository.save(user);
 	}
+
+	@PostMapping("/login")
+	public String login(@RequestBody User user) {
+		System.out.println(user.getPassword());
+
+		return "OK";
+	}
 }
