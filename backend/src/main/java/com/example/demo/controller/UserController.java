@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,13 +15,18 @@ import com.example.demo.repository.UserRepository;
 public class UserController {
 
 	private final UserRepository userRepository;
+	private final PasswordEncoder passwordEncoder;
 
-	public UserController(UserRepository userRepository) {
+	public UserController(UserRepository userRepository,
+			PasswordEncoder passwordEncoder) {
 		this.userRepository = userRepository;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	@PostMapping("/signup")
 	public void signup(@RequestBody User user) {
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+
 		userRepository.save(user);
 	}
 
