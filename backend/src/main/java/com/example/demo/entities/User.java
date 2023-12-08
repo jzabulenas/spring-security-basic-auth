@@ -1,19 +1,15 @@
 package com.example.demo.entities;
 
 import java.util.Collection;
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -27,11 +23,13 @@ public class User implements UserDetails {
 	private String username;
 	private String password;
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "Users_authorities",
-			joinColumns = @JoinColumn(name = "User_id"),
-			inverseJoinColumns = @JoinColumn(name = "Authority_id"))
-	private Set<Authority> authorities;
+//	@ManyToMany(fetch = FetchType.EAGER)
+//	@JoinTable(name = "Users_authorities",
+//			joinColumns = @JoinColumn(name = "User_id"),
+//			inverseJoinColumns = @JoinColumn(name = "Authority_id"))
+//	private Set<Authority> authorities;
+
+	private String role;
 
 	public String getUsername() {
 		return username;
@@ -49,9 +47,13 @@ public class User implements UserDetails {
 		this.password = password;
 	}
 
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return authorities;
+		return List.of(() -> role);
 	}
 
 	@Override
