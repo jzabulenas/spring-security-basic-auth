@@ -26,6 +26,7 @@ public class UserController {
 	@PostMapping("/signup")
 	public void signup(@RequestBody User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		user.setRole("USER");
 
 		userRepository.save(user);
 	}
