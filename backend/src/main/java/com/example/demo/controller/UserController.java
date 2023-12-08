@@ -31,10 +31,11 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public String login(@RequestBody User user) {
-		System.out.println(user.getPassword());
+	public User login(@RequestBody User user) {
+		User userDb = userRepository
+				.findUserByUsername(user.getUsername()).get();
 
-		return "OK";
+		return userDb;
 	}
 
 	@GetMapping("/demo")
