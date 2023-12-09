@@ -34,7 +34,10 @@ public class UserController {
 	@PostMapping("/login")
 	public User login(@RequestBody User user) {
 		User userDb = userRepository
-				.findUserByUsername(user.getUsername()).get();
+				.findUserByUsername(user.getUsername())
+				.filter(uDb -> passwordEncoder.matches(user.getPassword(),
+						uDb.getPassword()))
+				.get();
 
 		return userDb;
 	}
