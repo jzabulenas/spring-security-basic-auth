@@ -9,14 +9,17 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("your_login_endpoint", {
+      const response = await axios.post("http://localhost:8080/login", {
         username,
         password,
       });
 
       // If login is successful, handle storing the token or session information
       // e.g., store token in localStorage
-      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("username", username);
+      localStorage.setItem("password", password);
+      console.log(localStorage.getItem("username"));
+      console.log(localStorage.getItem("password"));
 
       // Redirect or update UI to indicate successful login
     } catch (error) {
