@@ -1,3 +1,10 @@
 export default function Home() {
-  return <p>This is the homepage</p>;
+  const role = localStorage.getItem("role");
+
+  return (
+    <>
+      This is the homepage
+      {role === "USER" && <p>hello regular user</p>}
+    </>
+  );
 }

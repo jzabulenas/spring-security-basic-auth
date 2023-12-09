@@ -18,8 +18,7 @@ const Login = () => {
       // e.g., store token in localStorage
       localStorage.setItem("username", username);
       localStorage.setItem("password", password);
-      console.log(localStorage.getItem("username"));
-      console.log(localStorage.getItem("password"));
+      localStorage.setItem("role", response.data.authorities[0].authority);
 
       // Redirect or update UI to indicate successful login
     } catch (error) {
