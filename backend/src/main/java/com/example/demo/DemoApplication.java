@@ -26,12 +26,13 @@ public class DemoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		User user = new User();
-		user.setUsername("tony");
-		user.setPassword(passwordEncoder.encode("gabagool"));
-		user.setRole("ADMIN");
-
-		userRepository.save(user);
+		if (!userRepository.existsByUsername("tony")) {
+			User user = new User();
+			user.setUsername("tony");
+			user.setPassword(passwordEncoder.encode("gabagool"));
+			user.setRole("ADMIN");
+			userRepository.save(user);
+		}
 	}
 
 }
